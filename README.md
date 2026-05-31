@@ -68,7 +68,7 @@ server.js
 1. Clone the repository
 
 ```bash
-git clone https://github.com/amisha-ctrl/innerbloom.git
+git clone [https://github.com/amisha-ctrl/innerbloom.git](https://github.com/amisha-ctrl/innerbloom-period-tracker.git)
 ```
 
 2. Navigate to the project directory
