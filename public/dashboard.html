@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Dashboard</title>
+    <link rel="stylesheet" href="./css/dashboard.css">
+    <link rel="stylesheet" href="./assets/fontawesome/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" />
+    <link href="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="logo">
+                <img src="./assets/images/InnerBloom Logo.png" width="150px" alt="InnerBloom Logo">
+            </div>
+            <div class="profile-container">
+                <div class="profile-icon" id="profileIcon">
+                    <i class="fa-solid fa-user"></i>
+                </div>
+                <div class="dropdown" id="dropdown">
+                    <div class="user-info">
+                        <h3 id="userName"></h3>
+                        <div style="display: flex; align-items: center; gap: 5px;"><i class="fa-solid fa-envelope"></i>
+                            <p id="userEmail"></p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 5px;"><i
+                                class="fa-solid fa-location-dot"></i>
+                            <p id="userLocation"></p>&nbsp;<div onclick="refreshLocation()"
+                                style="display: flex; justify-content: center; align-items: center; padding: 5px; border-radius: 3px; cursor: pointer; background: #081229;">
+                                <i class="fa-solid fa-arrow-rotate-right"
+                                    style="margin: 0px; width: 100%; color: white;"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="btn-group">
+                        <button onclick="editInfo()" class="btn edit-btn">
+                            Edit Info
+                        </button>
+                        <button onclick="logOut()" class="btn logout-btn">
+                            Logout
+                        </button>
+                        <button onclick="deleteUser()" class="btn delete-btn">
+                            Delete Account
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="dashboard">
+
+        <!-- HERO SECTION -->
+        <section class="hero-section">
+
+            <div class="hero-left">
+                <h1>Welcome back, Amisha 🌸</h1>
+                <p>
+                    Track your cycle, understand your body and take care of yourself.
+                </p>
+            </div>
+
+        </section>
+
+
+        <!-- EMPTY STATE CARD -->
+        <section class="empty-state-card">
+
+            <div class="empty-left">
+                <div class="icon-box">🩸</div>
+
+                <div>
+                    <h2>No period data yet</h2>
+                    <p>
+                        Start by logging your period dates to unlock cycle insights,
+                        predictions and history.
+                    </p>
+                </div>
+            </div>
+
+            <button id="logPeriodBtn" class="primary-btn">+ Log Period</button>
+
+        </section>
+
+
+        <!-- MAIN GRID -->
+        <section class="main-grid">
+
+            <!-- LEFT CONTENT -->
+            <div class="left-content">
+
+                <!-- OVERVIEW -->
+                <section class="overview-section">
+
+                    <h2>Your Cycle Overview</h2>
+
+                    <div class="overview-cards">
+
+                        <div class="overview-card">
+                            <span>📅</span>
+                            <h3>Average Cycle Length</h3>
+                            <h1 id="averageCycleLength">--</h1>
+                            <p>Start logging to see</p>
+                        </div>
+
+                        <div class="overview-card">
+                            <span>🩸</span>
+                            <h3>Average Period Length</h3>
+                            <h1 id="averagePeriodLength">--</h1>
+                            <p>Start logging to see</p>
+                        </div>
+
+                        <div class="overview-card">
+                            <span>⏱️</span>
+                            <h3>Total Cycles Tracked</h3>
+                            <h1 id="totalCycles">0</h1>
+                            <p>Start logging to see</p>
+                        </div>
+
+                        <div class="overview-card">
+                            <span>📈</span>
+                            <h3>Longest Cycle</h3>
+                            <h1 id="longestCycle">--</h1>
+                            <p>Start logging to see</p>
+                        </div>
+
+                    </div>
+
+                </section>
+
+
+                <!-- HISTORY -->
+                <section class="history-section">
+
+                    <div class="section-title">
+                        <h2>Your History</h2>
+                        <button id="viewAllBtn" class="outline-btn">View All</button>
+                    </div>
+
+                    <div id="history" class="history-container history-empty">
+                        <div class="history-icon">📋</div>
+
+                        <h2>No history yet</h2>
+                        <p>
+                            Once you log your periods,
+                            your history will appear here.
+                        </p>
+                    </div>
+
+                </section>
+
+
+                <!-- REMINDER -->
+                <section class="reminder-box">
+                    <div class="reminder-icon">🔔</div>
+
+                    <div>
+                        <h3>Reminder</h3>
+                        <p>
+                            Consistency is key! The more you track,
+                            the better insights you'll get.
+                        </p>
+                    </div>
+                </section>
+
+            </div>
+
+
+            <!-- RIGHT SIDEBAR -->
+            <aside class="sidebar">
+
+                <!-- WHAT TO TRACK -->
+                <section class="sidebar-card">
+                    <h2>What to track?</h2>
+
+                    <div class="track-item">
+                        <span>📅</span>
+
+                        <div>
+                            <h4>Log Period</h4>
+                            <p>Add start and end dates</p>
+                        </div>
+                    </div>
+
+                    <div class="track-item">
+                        <span>😊</span>
+
+                        <div>
+                            <h4>Symptoms</h4>
+                            <p>Track how you feel daily</p>
+                        </div>
+                    </div>
+
+                    <div class="track-item">
+                        <span>📝</span>
+
+                        <div>
+                            <h4>Notes</h4>
+                            <p>Add notes for your day</p>
+                        </div>
+                    </div>
+
+                    <div class="track-item">
+                        <span>📊</span>
+
+                        <div>
+                            <h4>Insights</h4>
+                            <p>See your cycle patterns</p>
+                        </div>
+                    </div>
+                </section>
+
+
+                <!-- HEALTH TIP -->
+                <section class="sidebar-card health-tip">
+                    <h2>💗 Health Tip</h2>
+
+                    <p>
+                        Stay hydrated, eat balanced meals,
+                        and listen to your body.
+                    </p>
+                </section>
+
+
+                <!-- HOW TO START -->
+                <section class="sidebar-card">
+                    <h2>How to get started?</h2>
+
+                    <div class="steps">
+
+                        <div class="step">
+                            <span>1</span>
+                            <p>Click on 'Log Period'</p>
+                        </div>
+
+                        <div class="step">
+                            <span>2</span>
+                            <p>Add your start & end dates</p>
+                        </div>
+
+                        <div class="step">
+                            <span>3</span>
+                            <p>Track symptoms and notes</p>
+                        </div>
+
+                        <div class="step">
+                            <span>4</span>
+                            <p>View insights and predictions</p>
+                        </div>
+
+                    </div>
+                </section>
+
+            </aside>
+
+        </section>
+
+        <!-- Overlay -->
+        <div id="periodModal" class="modal-overlay">
+
+            <!-- Modal -->
+            <div class="modal-container">
+
+                <!-- Header -->
+                <div class="modal-header">
+                    <h2>Log Your Period</h2>
+                    <button id="closeModalBtn" class="close-btn">&times;</button>
+                </div>
+
+                <!-- Form -->
+                <form id="periodForm">
+
+                    <!-- Start Date -->
+                    <div class="form-group">
+                        <label for="startDate">Start Date</label>
+                        <input type="date" id="startDate" name="startDate" required />
+                    </div>
+
+                    <!-- End Date -->
+                    <div class="form-group">
+                        <label for="endDate">End Date</label>
+                        <input type="date" id="endDate" name="endDate" required />
+                    </div>
+
+                    <!-- Flow Intensity -->
+                    <div class="form-group">
+                        <label for="flowIntensity">Flow Intensity</label>
+
+                        <select id="flowIntensity" name="flowIntensity">
+                            <option value="Light">Light</option>
+                            <option value="Medium" selected>Medium</option>
+                            <option value="Heavy">Heavy</option>
+                        </select>
+                    </div>
+
+                    <!-- Symptoms -->
+                    <div class="form-group">
+                        <label>Symptoms</label>
+
+                        <div class="symptoms-grid">
+
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="Cramps" name="symptoms">
+                                Cramps
+                            </label>
+
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="Headache" name="symptoms">
+                                Headache
+                            </label>
+
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="Mood Swings" name="symptoms">
+                                Mood Swings
+                            </label>
+
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="Acne" name="symptoms">
+                                Acne
+                            </label>
+
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="Fatigue" name="symptoms">
+                                Fatigue
+                            </label>
+
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="Back Pain" name="symptoms">
+                                Back Pain
+                            </label>
+
+                            <label class="checkbox-item">
+                                <input type="checkbox" value="Bloating" name="symptoms">
+                                Bloating
+                            </label>
+
+                        </div>
+                    </div>
+
+                    <!-- Notes -->
+                    <div class="form-group">
+                        <label for="notes">Notes</label>
+
+                        <textarea id="notes" name="notes" rows="4"
+                            placeholder="Write something about how you feel..."></textarea>
+                    </div>
+
+                    <!-- Buttons -->
+                    <div class="form-buttons">
+                        <button type="button" id="cancelBtn" class="cancel-btn">
+                            Cancel
+                        </button>
+
+                        <button type="submit" id="savePeriodBtn" class="save-btn">
+                            Save Period
+                        </button>
+                    </div>
+
+                </form>
+            </div>
+        </div>
+
+        <!-- Calendar Modal -->
+        <div id="calendarModal" class="modal-overlay">
+
+            <div class="modal-container" style="max-width: 1000px;">
+
+                <div class="modal-header">
+                    <h2>Period Calendar</h2>
+
+                    <button id="closeCalendarBtn" class="close-btn">
+                        &times;
+                    </button>
+                </div>
+
+                <div id="calendar"></div>
+
+            </div>
+
+        </div>
+
+    </main>
+
+
+    <script src="./js/dashboard.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.15/index.global.min.js"></script>
+    <script>
+        const profileIcon = document.getElementById("profileIcon");
+        const dropdown = document.getElementById("dropdown");
+        profileIcon.addEventListener("click", () => {
+            dropdown.classList.toggle("active");
+        });
+        window.addEventListener("click", (e) => {
+            if (
+                !profileIcon.contains(e.target) &&
+                !dropdown.contains(e.target)
+            ) {
+                dropdown.classList.remove("active");
+            }
+        });
+    </script>
+
+</body>
+
+</html>
