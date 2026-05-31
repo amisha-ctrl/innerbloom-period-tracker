@@ -68,7 +68,7 @@ server.js
 1. Clone the repository
 
 ```bash
-git clone [https://github.com/amisha-ctrl/innerbloom.git](https://github.com/amisha-ctrl/innerbloom-period-tracker.git)
+git clone https://github.com/amisha-ctrl/innerbloom.git
 ```
 
 2. Navigate to the project directory
@@ -88,7 +88,7 @@ npm install
 5. Start the server
 
 ```bash
-npm run dev
+npm start
 ```
 
 or
